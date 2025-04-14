@@ -3,12 +3,12 @@ import React from 'react'
 
 const Choose = () => {
   return (
-    <div className="min-h-screen w-full text-[#2B2B2B] py-12">
-      <div className="w-[90%] mx-auto">
-        <div className="flex flex-col items-center gap-10 text-center md:text-left">
+    <div className="min-h-screen w-full text-[#2B2B2B] py-12 bg-white">
+      <div className="w-[90%] mx-auto bg-white">
+        <div className="flex flex-col items-center gap-10 text-center md:text-left bg-white">
           <h1 className="font-bold text-4xl">Why Choose Us?</h1>
 
-          <div className="flex flex-col md:flex-row justify-between mt-10 gap-8">
+          <div className="flex flex-col md:flex-row justify-between mt-10 gap-8 bg-white">
             {/* Image Section */}
             <div className="w-full md:w-[48%]">
               <Image

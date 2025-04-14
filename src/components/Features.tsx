@@ -3,13 +3,13 @@ import React from 'react'
 
 const Features = () => {
     return (
-        <div className="min-h-screen w-full text-[#2B2B2B] py-12">
-            <div className="w-[90%] mx-auto">
+        <div className="min-h-screen w-full text-[#2B2B2B] py-12 bg-white">
+            <div className="w-[90%] mx-auto bg-white">
                 <div className="flex flex-col items-center gap-10 text-center md:text-left">
                     <h1 className="font-bold text-4xl">Features</h1>
 
                     {/* Wrapper for Feature Blocks */}
-                    <div className="flex flex-col gap-12 mt-10">
+                    <div className="flex flex-col gap-12 mt-10 bg-white">
                         {/* Feature 1 */}
                         <div className="flex flex-col md:flex-row items-center gap-10  text-center">
                             {/* Image */}
