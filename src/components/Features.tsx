@@ -3,7 +3,7 @@ import React from 'react'
 
 const Features = () => {
     return (
-        <div className="min-h-screen w-full text-[#2B2B2B] py-12 bg-white">
+        <div className="min-h-screen w-full text-[#2B2B2B] py-4 bg-white">
             <div className="w-[90%] mx-auto bg-white">
                 <div className="flex flex-col items-center gap-10 text-center md:text-left">
                     <h1 className="font-bold text-4xl">Features</h1>
@@ -15,11 +15,11 @@ const Features = () => {
                             {/* Image */}
                             <div className="w-full md:w-1/2 align-center flex items-center justify-center flex-col">
                                 <Image
-                                    src="/tutorial 2.svg"
+                                    src="/review.jpeg"
                                     alt="feature"
                                     width={500}
                                     height={100}
-                                   
+                                    className=" rounded-lg"
                                 />
                                 {/* Text */}
                                 <div className=" text-[#2B2B2B] w-[80%]">
@@ -35,11 +35,11 @@ const Features = () => {
 
                             <div className="w-full md:w-1/2 text-center flex items-center justify-center flex-col">
                                 <Image
-                                    src="/tutorial 3.svg"
+                                    src="/job.jpeg"
                                     alt="feature"
                                     width={500}
                                     height={100}
-                                    
+                                     className=" rounded-lg"
                                 />
                                 {/* Text */}
                                 <div className=" text-[#2B2B2B] w-[80%] ">
