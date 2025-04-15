@@ -12,9 +12,9 @@ export default function Navbar() {
       <div className="max-w-7xl mx-auto w-[90%] flex items-center justify-between">
         {/* Logo */}
         <div className="text-2xl font-bold flex items-center gap-2">
-          <span className="text-white">
-            JP<span className="text-[#FF0B80]">Elite Virtual Solution</span>
-          </span>
+          <Link href={'/'}> <span className="text-white">
+            JP Elite<span className="text-[#FF0B80]"> Virtual Solution</span>
+          </span></Link>
         </div>
 
         {/* Desktop Nav */}
@@ -22,14 +22,15 @@ export default function Navbar() {
           <Link href="/courses" className="hover:text-[#FF0B80] transition">Courses</Link>
           <Link href="/about" className="hover:text-[#FF0B80] transition">About JP</Link>
           <Link href="/tutorials" className="hover:text-[#FF0B80] transition">Quick Tutorials</Link>
-          <Link href="/account" className="hover:text-[#FF0B80] transition">My Account</Link>
+          
         </nav>
 
         {/* Call to Action (Desktop) */}
-        <div className="hidden md:block">
-          <Link href="/start">
+        <div className="hidden md:block space-x-4">
+        <Link href="/login" className="hover:text-[#FF0B80] transition">Login</Link>
+          <Link href="/signup">
             <button className="bg-[#FF0B80] hover:bg-[#FF4DA8] text-white px-4 py-1 rounded-full font-semibold transition">
-              Start Learning
+              Sign up
             </button>
           </Link>
         </div>

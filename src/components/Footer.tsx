@@ -11,9 +11,9 @@ export default function Footer() {
         <div>
           <div className="flex items-center gap-2">
             {/* <Image src="/logo.svg" alt="StackJunior" width={30} height={30} /> */}
-            <h2 className="text-xl font-bold"><span className="text-white">
-            JP<span className="text-[#FF0B80]">Elite Virtual Solution</span>
-          </span></h2>
+            <Link href={"/"}><h2 className="text-xl font-bold"><span className="text-white">
+             JP Elite<span className="text-[#FF0B80]"> Virtual Solution</span>
+          </span></h2></Link>
           </div>
           <p className="mt-4 text-sm">
             Is an ed-tech platform that trains inquisitive learners the concepts of virtual assistant  and other tech skills
@@ -25,7 +25,7 @@ export default function Footer() {
           <h4 className="font-semibold mb-2">Quick Links</h4>
           <ul className="space-y-1 text-sm">
             
-            <li><Link href="#">About JP</Link></li>
+            <li><Link href="/about">About JP</Link></li>
             <li><Link href="#">Courses</Link></li>
             <li><Link href="#">Privacy Policy</Link></li>
             <li><Link href="#">Send Feedback</Link></li>
@@ -55,7 +55,7 @@ export default function Footer() {
       <div className="bg-[#00426D] py-4 text-center text-sm">
   &copy;{new Date().toLocaleString("default", { month: "long", year: "numeric" })} -{" "}
   <span className="text-white">
-    JP<span className="text-[#FF0B80]">Elite Virtual Solution</span>
+    JP Elite<span className="text-[#FF0B80]"> Virtual Solution</span>
   </span>. All Rights Reserved.
 </div>
 

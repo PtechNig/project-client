@@ -22,7 +22,7 @@ const Features = () => {
                                     className=" rounded-lg"
                                 />
                                 {/* Text */}
-                                <div className=" text-[#2B2B2B] w-[80%]">
+                                <div className=" text-[#2B2B2B] w-[80%] my-5">
                                     <h3 className="font-semibold text-2xl mb-4">
                                         Project Review
                                     </h3>
@@ -42,7 +42,7 @@ const Features = () => {
                                      className=" rounded-lg"
                                 />
                                 {/* Text */}
-                                <div className=" text-[#2B2B2B] w-[80%] ">
+                                <div className=" text-[#2B2B2B] w-[80%] my-5">
                                     <h3 className="font-semibold text-2xl mb-4">
                                         Mentorship
                                     </h3>
