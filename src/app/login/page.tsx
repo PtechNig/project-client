@@ -1,6 +1,7 @@
 // app/login/page.tsx
 'use client';
 
+import Image from 'next/image';
 import { useState } from 'react';
 
 export default function LoginPage() {
@@ -15,9 +16,20 @@ export default function LoginPage() {
   };
 
   return (
-    <section className="min-h-screen flex items-center justify-center bg-[#d9ecf8] px-4">
+    <section className="min-h-screen flex items-center justify-center px-4 relative">
+             <div className="fixed inset-0 -z-10">
+                <Image
+                  src="/onboarding.jpeg" 
+                  alt="Background"
+                  fill
+                  className="object-cover blur-md"
+                  quality={100}
+                  priority
+                />
+                 <div className="absolute inset-0 bg-[#0063A4]/50"></div>
+                </div>
       <div className="max-w-md w-full bg-white p-8 rounded-lg shadow-md">
-        <h2 className="text-3xl font-bold text-center text-[#00426D] mb-6">Login</h2>
+        <h2 className="text-3xl font-bold text-center text-[#0063A4] mb-6">Login</h2>
 
         <form onSubmit={handleSubmit} className="space-y-5">
           <div>
@@ -44,7 +56,7 @@ export default function LoginPage() {
 
           <button
             type="submit"
-            className="w-full bg-[#00426D] text-white py-2 rounded-md hover:bg-[#003255] transition-colors"
+            className="w-full text-white py-2 rounded-md transition duration-500 cursor-pointer bg-[#0063A4] hover:bg-[#6cc4ff] "
           >
             Sign In
           </button>

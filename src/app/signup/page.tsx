@@ -1,6 +1,7 @@
 "use client";
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import Image from 'next/image';
 
 const SignupPage = () => {
   const [formData, setFormData] = useState({
@@ -76,16 +77,29 @@ const SignupPage = () => {
       setIsLoading(false);
     }
   };
-
+// bg-[#d9ecf8]
   return (
-    <div className="min-h-screen bg-[#d9ecf8] flex flex-col justify-center py-12 sm:px-10 lg:px-8">
+    <div className="min-h-screen  flex flex-col justify-center py-12 sm:px-10 lg:px-8 relative">
+     
+     <div className="fixed inset-0 -z-10">
+        <Image
+          src="/onboarding.jpeg" 
+          alt="Background"
+          fill
+          className="object-cover blur-md"
+          quality={100}
+          priority
+        />
+         <div className="absolute inset-0 bg-[#0063A4]/50"></div>
+        </div>
+
       <div className="sm:mx-auto sm:w-full sm:max-w-md">
-        <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
+        <h2 className="mt-6 text-center text-3xl font-extrabold text-white">
           Create your  <span className="text-[#FF0B80]">
             JP Elite<span className="text-[#FF0B80]"> Account</span>
           </span>
         </h2>
-        <p className="mt-2 text-center text-sm text-gray-600">
+        <p className="mt-2 text-center text-sm text-white">
           Join us to prepare for the opportunities of the future
         </p>
       </div>
@@ -187,7 +201,7 @@ const SignupPage = () => {
                 <div className="w-full border-t border-gray-300" />
               </div>
               <div className="relative flex justify-center text-sm">
-                <span className="px-2 bg-white text-gray-500">
+                <span className="px-2 bg-white text-gray-700">
                   Already have an account?
                 </span>
               </div>
