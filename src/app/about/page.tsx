@@ -8,7 +8,7 @@ const AboutSection = () => {
     return (
 <section className=" bg-[#d9ecf8] ">
     <Navbar/>
-  <div className="w-[90%] mx-auto flex flex-col-reverse md:flex-row gap-10 justify-between items-center min-h-screen ">
+  <div className="w-[90%] mx-auto flex flex-col-reverse md:flex-row gap-10 md:gap-5 justify-between items-center min-h-screen py-10">
     
     {/* Text Content */}
     <div className="w-full md:w-1/2 px-6">
