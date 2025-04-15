@@ -49,10 +49,10 @@ export default function Navbar() {
           <Link href="/courses" onClick={() => setMobileMenuOpen(false)} className="block hover:text-[#FF0B80]">Courses</Link>
           <Link href="/about" onClick={() => setMobileMenuOpen(false)} className="block hover:text-[#FF0B80]">About JP</Link>
           <Link href="/tutorials" onClick={() => setMobileMenuOpen(false)} className="block hover:text-[#FF0B80]">Quick Tutorials</Link>
-          <Link href="/account" onClick={() => setMobileMenuOpen(false)} className="block hover:text-[#FF0B80]">My Account</Link>
-          <Link href="/start" onClick={() => setMobileMenuOpen(false)}>
+          <Link href="/login" onClick={() => setMobileMenuOpen(false)} className="block hover:text-[#FF0B80]">Login</Link>
+          <Link href="/signup" onClick={() => setMobileMenuOpen(false)}>
             <button className="bg-[#FF0B80] hover:bg-[#FF4DA8] w-full text-white px-4 py-2 rounded-full font-semibold transition mt-2">
-              Start Learning
+              Signup
             </button>
           </Link>
         </div>
