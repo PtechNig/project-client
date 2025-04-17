@@ -58,8 +58,9 @@ export default function StudentDashboardLayout({ children }: { children: ReactNo
               <Link
                 href={href}
                 className={`flex items-center gap-3 px-4 py-2 rounded transition ${
-                  pathname === href ? 'bg-[#003255]' : 'hover:bg-[#003255]'
+                  pathname.startsWith(href) ? 'bg-[#003255]' : 'hover:bg-[#003255]'
                 }`}
+                onClick={() => setSidebarOpen(false)} // Close mobile menu
               >
                 <Icon className="h-5 w-5" />
                 {label}
@@ -69,26 +70,27 @@ export default function StudentDashboardLayout({ children }: { children: ReactNo
         </ul>
 
         <div className="mt-10 border-t border-[#003255] pt-4">
-  <ul className="space-y-2">
-    {extraLinks.map(({ href, label, icon: Icon }) => (
-      <li key={href}>
-        <Link
-          href={href}
-          className={`flex items-center gap-3 px-4 py-2 rounded transition ${
-            label === 'Logout'
-              ? 'bg-[#FF0B80]'
-              : pathname === href
-              ? 'bg-[#003255]'
-              : 'hover:bg-[#003255]'
-          }`}
-        >
-          <Icon className="h-5 w-5" />
-          {label}
-        </Link>
-      </li>
-    ))}
-  </ul>
-</div>
+          <ul className="space-y-2">
+            {extraLinks.map(({ href, label, icon: Icon }) => (
+              <li key={href}>
+                <Link
+                  href={href}
+                  className={`flex items-center gap-3 px-4 py-2 rounded transition ${
+                    label === 'Logout'
+                      ? 'bg-[#FF0B80]'
+                      : pathname === href
+                      ? 'bg-[#003255]'
+                      : 'hover:bg-[#003255]'
+                  }`}
+                  onClick={() => setSidebarOpen(false)} // Close mobile menu
+                >
+                  <Icon className="h-5 w-5" />
+                  {label}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
       </aside>
 
       {/* Main Content */}
