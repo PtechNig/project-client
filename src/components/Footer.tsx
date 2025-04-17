@@ -25,10 +25,14 @@ export default function Footer() {
           <h4 className="font-semibold mb-2">Quick Links</h4>
           <ul className="space-y-1 text-sm">
             
-            <li><Link href="/about">About JP</Link></li>
-            <li><Link href="#">Courses</Link></li>
-            <li><Link href="#">Privacy Policy</Link></li>
-            <li><Link href="#">Send Feedback</Link></li>
+            <li><Link href="/about" className=" hover:text-[#FF4DA8] text-white duration-500 transition">About JP</Link></li>
+            <li><Link href="#" className=" hover:text-[#FF4DA8] text-white duration-500 transition">Courses</Link></li>
+         <li>   <Link href="/auth/login"className=" hover:text-[#FF4DA8] text-white duration-500 transition">Login</Link></li>
+         <li> <Link href="/auth/signup" className=" hover:text-[#FF4DA8] text-white duration-500 transition">
+              Sign up
+          </Link></li>
+            <li><Link href="#" className=" hover:text-[#FF4DA8] text-white duration-500 transition">Privacy Policy</Link></li>
+            <li><Link href="#" className=" hover:text-[#FF4DA8] text-white duration-500 transition">Send Feedback</Link></li>
           </ul>
         </div>
 
@@ -36,18 +40,22 @@ export default function Footer() {
         <div>
           <h4 className="font-semibold mb-2">Socials</h4>
           <div className="flex gap-4 text-xl">
-            <FaFacebookF className="cursor-pointer hover:text-[#FF0B80] duration-500 transition"/>
-            <FaTwitter className="cursor-pointer hover:text-[#FF0B80] duration-500 transition" />
-            <FaInstagram className="cursor-pointer hover:text-[#FF0B80] duration-500 transition" />
-            <FaYoutube className="cursor-pointer hover:text-[#FF0B80] duration-500 transition" />
+            <Link href={'https://www.facebook.com/profile.php?id=61575300115874&sk=about'}><FaFacebookF className="cursor-pointer hover:text-[#FF0B80] duration-500 transition"/></Link>
+            <Link href={'https://www.facebook.com/profile.php?id=61575300115874&sk=about'}> <FaTwitter className="cursor-pointer hover:text-[#FF0B80] duration-500 transition" /></Link>
+            <Link href={'https://www.facebook.com/profile.php?id=61575300115874&sk=about'}> <FaInstagram className="cursor-pointer hover:text-[#FF0B80] duration-500 transition" /></Link>
+            <Link href={'https://www.youtube.com/channel/UCgy8MAEbkWnIWWAYHExXBCA'}><FaYoutube className="cursor-pointer hover:text-[#FF0B80] duration-500 transition" /></Link>
+            
+           
+           
+            
           </div>
         </div>
 
         {/* Contact */}
         <div>
           <h4 className="font-semibold mb-2">Contact Us</h4>
-          <p className="text-sm">+234 xxx xxx xxxx</p>
-          <p className="text-sm mt-1">+234 xxx xxx xxxx</p>
+          <p className="text-sm">+234 706 972 7587</p>
+          <p className="text-sm mt-1">+234 706 963 3272</p>
         </div>
       </div>
 

@@ -2,6 +2,7 @@
 'use client';
 
 import Image from 'next/image';
+import Link from 'next/link';
 import { useState } from 'react';
 
 export default function LoginPage() {
@@ -63,7 +64,11 @@ export default function LoginPage() {
         </form>
 
         <p className="text-center text-sm text-gray-600 mt-4">
-          Don&apos;t have an account? <a href="/signup" className="text-[#FF0B80] font-medium">Register</a>
+          Don&apos;t have an account? <Link href="/auth/signup" className="text-[#FF0B80] font-medium">Register</Link>
+        </p>
+
+        <p className="text-center text-sm mt-4">
+          <Link href="#" className="text-[#0063A4] font-medium">Forgot Password</Link>
         </p>
       </div>
     </section>

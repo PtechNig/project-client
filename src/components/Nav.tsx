@@ -27,8 +27,8 @@ export default function Navbar() {
 
         {/* Call to Action (Desktop) */}
         <div className="hidden md:block space-x-4">
-        <Link href="/login" className="hover:text-[#FF0B80] transition">Login</Link>
-          <Link href="/signup">
+        <Link href="/auth/login" className="hover:text-[#FF0B80] transition">Login</Link>
+          <Link href="/auth/signup">
             <button className="bg-[#FF0B80] hover:bg-[#FF4DA8] text-white px-4 py-1 rounded-full font-semibold transition">
               Sign up
             </button>
