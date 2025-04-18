@@ -1,13 +1,19 @@
+'use client';
+
 import { ChevronLeft, FolderOpenDot } from 'lucide-react';
 import Link from 'next/link';
+import { use } from 'react';
 import { courses } from '@/data/Course';
 
-export default function CoursePage({
-  params,
-}: {
-  params: { courseId: string };
-}) {
-  const course = courses.find(c => c.id === Number(params.courseId));
+interface PageProps {
+  params: Promise<{ courseId: string }>;
+}
+
+export default function CoursePage({ params }: PageProps) {
+  // Unwrap the params promise
+  const { courseId } = use(params);
+  
+  const course = courses.find(c => c.id === Number(courseId));
 
   if (!course) {
     return (
