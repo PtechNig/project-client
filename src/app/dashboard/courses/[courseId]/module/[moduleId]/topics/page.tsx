@@ -1,7 +1,9 @@
 // src/app/dashboard/courses/[courseId]/module/[moduleId]/topics/page.tsx
+'use client';
 
 import { ChevronLeft, Video, FileText } from 'lucide-react';
 import Link from 'next/link';
+import { use } from 'react';
 
 interface Topic {
   id: number;
@@ -58,16 +60,16 @@ const courses: Course[] = [
   }
 ];
 
-export default function TopicsPage({
-  params,
-}: {
-  params: { courseId: string; moduleId: string };
-}) {
-  const courseId = Number(params.courseId);
-  const moduleId = Number(params.moduleId);
+interface PageProps {
+  params: Promise<{ courseId: string; moduleId: string }>;
+}
+
+export default function TopicsPage({ params }: PageProps) {
+  // Unwrap the params promise
+  const { courseId, moduleId } = use(params);
   
-  const course = courses.find((c) => c.id === courseId);
-  const modul = course?.modules.find((m) => m.id === moduleId);
+  const course = courses.find((c) => c.id === Number(courseId));
+  const modul = course?.modules.find((m) => m.id === Number(moduleId));
 
   if (!course || !modul) {
     return (
@@ -87,7 +89,7 @@ export default function TopicsPage({
     <div className="max-w-6xl mx-auto px-4 py-10">
       <div className="mb-6">
         <Link
-          href={`/dashboard/courses/${courseId}/module/${moduleId}`}
+          href={`/dashboard/courses/${course.id}/module/${modul.id}`}
           className="text-blue-600 hover:underline flex items-center"
         >
           <ChevronLeft className="w-4 h-4 mr-1" />
@@ -102,7 +104,7 @@ export default function TopicsPage({
           {modul.topics.map((topic) => (
             <Link
               key={topic.id}
-              href={`/dashboard/courses/${courseId}/module/${moduleId}/topics/${topic.id}`}
+              href={`/dashboard/courses/${course.id}/module/${modul.id}/topics/${topic.id}`}
               className="block p-4 border border-gray-200 rounded-lg hover:border-blue-500 transition-colors"
             >
               <div className="flex items-start gap-3">
