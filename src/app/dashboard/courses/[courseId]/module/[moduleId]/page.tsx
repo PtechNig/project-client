@@ -2,20 +2,26 @@ import { ChevronLeft, Video, FileText } from 'lucide-react';
 import Link from 'next/link';
 import { courses } from '@/data/Course';
 
-export default function ModulePage({
-  params,
-}: {
-  params: { courseId: string; moduleId: string };
-}) {
-  const course = courses.find(c => c.id === Number(params.courseId));
-  const modul = course?.modules.find(m => m.id === Number(params.moduleId));
+interface ModulePageProps {
+  params: {
+    courseId: string;
+    moduleId: string;
+  };
+}
+
+export default function ModulePage({ params }: ModulePageProps) {
+  const courseId = Number(params.courseId);
+  const moduleId = Number(params.moduleId);
+
+  const course = courses.find(c => c.id === courseId);
+  const modul = course?.modules.find(m => m.id === moduleId);
 
   if (!course || !modul) {
     return (
       <div className="max-w-6xl mx-auto px-4 py-10 text-center">
         <h1 className="text-2xl font-bold mb-4">Module not found</h1>
-        <Link href={`/dashboard/courses/${course?.id}`} className="text-[#0063A4] hover:underline">
-          Return to course
+        <Link href={`/dashboard/courses`} className="text-[#0063A4] hover:underline">
+          Return to course list
         </Link>
       </div>
     );
@@ -45,10 +51,18 @@ export default function ModulePage({
               href={`/dashboard/courses/${course.id}/module/${modul.id}/topics/${topic.id}`}
               className="p-4 border border-gray-200 rounded-lg hover:border-[#0063A4] transition flex items-start gap-3"
             >
-              <div className={`p-2 rounded-full ${
-                topic.type === 'video' ? 'bg-red-100 text-red-500' : 'bg-blue-100 text-blue-500'
-              }`}>
-                {topic.type === 'video' ? <Video className="w-4 h-4" /> : <FileText className="w-4 h-4" />}
+              <div
+                className={`p-2 rounded-full ${
+                  topic.type === 'video'
+                    ? 'bg-red-100 text-red-500'
+                    : 'bg-blue-100 text-blue-500'
+                }`}
+              >
+                {topic.type === 'video' ? (
+                  <Video className="w-4 h-4" />
+                ) : (
+                  <FileText className="w-4 h-4" />
+                )}
               </div>
               <div>
                 <h3 className="font-medium text-gray-800">{topic.title}</h3>
