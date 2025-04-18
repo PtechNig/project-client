@@ -2,16 +2,21 @@
 
 import { ChevronLeft, Video, FileText } from 'lucide-react';
 import Link from 'next/link';
+import { use } from 'react';
 import { courses } from '@/data/Course';
 
 export default function TopicPage({
   params,
 }: {
-  params: { courseId: string; moduleId: string; topicId: string };
+  params: Promise<{ courseId: string; moduleId: string; topicId: string }>;
 }) {
-  const course = courses.find(c => c.id === Number(params.courseId));
-  const modul = course?.modules.find(m => m.id === Number(params.moduleId));
-  const topic = modul?.topics.find(t => t.id === Number(params.topicId));
+  // Unwrap the params Promise first
+  const { courseId, moduleId, topicId } = use(params);
+
+  // Then use the unwrapped values
+  const course = courses.find(c => c.id === Number(courseId));
+  const modul = course?.modules.find(m => m.id === Number(moduleId));
+  const topic = modul?.topics.find(t => t.id === Number(topicId));
 
   if (!course || !modul || !topic) {
     return (
@@ -46,7 +51,7 @@ export default function TopicPage({
           <div className={`p-2 rounded-full ${
             topic.type === 'video' ? 'bg-red-100 text-red-500' : 'bg-blue-100 text-blue-500'
           }`}>
-            {topic.type === 'video' ? <Video /> : <FileText />}
+            {topic.type === 'video' ? <Video className="w-4 h-4" /> : <FileText className="w-4 h-4" />}
           </div>
           <span className="text-gray-600">
             {topic.type === 'video' ? 'Video Lesson' : 'Reading Material'} • {topic.duration}
@@ -59,6 +64,7 @@ export default function TopicPage({
               src={topic.videoUrl}
               className="w-full h-full"
               allowFullScreen
+              title={topic.title}
             />
           </div>
         ) : (

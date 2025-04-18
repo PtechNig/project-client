@@ -1,10 +1,11 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { loadStripe } from '@stripe/stripe-js';
 import { Elements, CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
 import { FiCheckCircle, FiCreditCard, FiDownload } from 'react-icons/fi';
 
+// Move stripePromise outside the component to avoid recreating it
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!);
 
 type Certificate = {
@@ -16,50 +17,74 @@ type Certificate = {
 };
 
 const CertificatePaymentPage = () => {
-  const certificate: Certificate = {
-    id: 'cert_123',
-    name: 'Python Fundamentals Certification',
-    description: 'Certificate of completion for Python Fundamentals course',
-    price: 49.99,
-    currency: 'USD'
-  };
+  const [loading, setLoading] = useState(true);
+  const [certificate, setCertificate] = useState<Certificate | null>(null);
+
+  useEffect(() => {
+    // Simulate loading certificate data
+    // In a real app, you might fetch this from an API
+    const loadCertificate = async () => {
+      try {
+        // Replace with actual data fetching if needed
+        const certData: Certificate = {
+          id: 'cert_123',
+          name: 'Python Fundamentals Certification',
+          description: 'Certificate of completion for Python Fundamentals course',
+          price: 49.99,
+          currency: 'USD'
+        };
+        setCertificate(certData);
+      } catch (error) {
+        console.error('Error loading certificate:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadCertificate();
+  }, []);
+
+  if (loading) {
+    return (
+      <div className="max-w-4xl mx-auto p-6">
+        <div className="animate-pulse space-y-4">
+          <div className="h-8 bg-gray-200 rounded w-1/2"></div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div className="space-y-4">
+              <div className="h-6 bg-gray-200 rounded w-3/4"></div>
+              <div className="h-4 bg-gray-200 rounded w-full"></div>
+              <div className="h-4 bg-gray-200 rounded w-5/6"></div>
+            </div>
+            <div className="h-64 bg-gray-200 rounded"></div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  if (!certificate) {
+    return (
+      <div className="max-w-4xl mx-auto p-6 text-center">
+        <h1 className="text-2xl font-bold mb-4">Certificate Not Available</h1>
+        <p className="text-gray-600 mb-6">
+          We couldn&apos;t load the certificate information. Please try again later.
+        </p>
+        <button
+          onClick={() => window.location.reload()}
+          className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
+        >
+          Retry
+        </button>
+      </div>
+    );
+  }
 
   return (
     <div className="max-w-4xl mx-auto p-6">
       <h1 className="text-2xl font-bold mb-6">Certificate Payment</h1>
       
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <div className="bg-white p-6 rounded-lg shadow">
-          <h2 className="text-xl font-semibold mb-4">{certificate.name}</h2>
-          <p className="text-gray-600 mb-4">{certificate.description}</p>
-          <div className="border-t border-gray-200 pt-4">
-            <div className="flex justify-between items-center mb-2">
-              <span className="text-gray-600">Certificate Fee:</span>
-              <span className="font-bold">${certificate.price.toFixed(2)}</span>
-            </div>
-            <div className="flex justify-between items-center">
-              <span className="text-gray-600">Total:</span>
-              <span className="text-xl font-bold">${certificate.price.toFixed(2)}</span>
-            </div>
-          </div>
-          <div className="mt-6 p-4 bg-blue-50 rounded-lg">
-            <h3 className="font-medium text-blue-800 mb-2">What you&apos;ll get:</h3>
-            <ul className="space-y-2">
-              <li className="flex items-center">
-                <FiCheckCircle className="text-green-500 mr-2" />
-                <span>Official digital certificate</span>
-              </li>
-              <li className="flex items-center">
-                <FiCheckCircle className="text-green-500 mr-2" />
-                <span>Printable PDF version</span>
-              </li>
-              <li className="flex items-center">
-                <FiCheckCircle className="text-green-500 mr-2" />
-                <span>Verification URL</span>
-              </li>
-            </ul>
-          </div>
-        </div>
+        <CertificateDetails certificate={certificate} />
         
         <div className="bg-white p-6 rounded-lg shadow">
           <Elements stripe={stripePromise}>
@@ -70,6 +95,40 @@ const CertificatePaymentPage = () => {
     </div>
   );
 };
+
+const CertificateDetails = ({ certificate }: { certificate: Certificate }) => (
+  <div className="bg-white p-6 rounded-lg shadow">
+    <h2 className="text-xl font-semibold mb-4">{certificate.name}</h2>
+    <p className="text-gray-600 mb-4">{certificate.description}</p>
+    <div className="border-t border-gray-200 pt-4">
+      <div className="flex justify-between items-center mb-2">
+        <span className="text-gray-600">Certificate Fee:</span>
+        <span className="font-bold">${certificate.price.toFixed(2)}</span>
+      </div>
+      <div className="flex justify-between items-center">
+        <span className="text-gray-600">Total:</span>
+        <span className="text-xl font-bold">${certificate.price.toFixed(2)}</span>
+      </div>
+    </div>
+    <div className="mt-6 p-4 bg-blue-50 rounded-lg">
+      <h3 className="font-medium text-blue-800 mb-2">What you&apos;ll get:</h3>
+      <ul className="space-y-2">
+        <li className="flex items-center">
+          <FiCheckCircle className="text-green-500 mr-2" />
+          <span>Official digital certificate</span>
+        </li>
+        <li className="flex items-center">
+          <FiCheckCircle className="text-green-500 mr-2" />
+          <span>Printable PDF version</span>
+        </li>
+        <li className="flex items-center">
+          <FiCheckCircle className="text-green-500 mr-2" />
+          <span>Verification URL</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+);
 
 const PaymentForm = ({ certificate }: { certificate: Certificate }) => {
   const stripe = useStripe();
@@ -101,6 +160,10 @@ const PaymentForm = ({ certificate }: { certificate: Certificate }) => {
         }),
       });
 
+      if (!response.ok) {
+        throw new Error('Failed to create payment intent');
+      }
+
       const { clientSecret } = await response.json();
 
       const { error, paymentIntent } = await stripe.confirmCardPayment(clientSecret, {
@@ -125,9 +188,9 @@ const PaymentForm = ({ certificate }: { certificate: Certificate }) => {
           }),
         });
       }
-    } catch (_err) {
-      setPaymentError('An error occurred during payment processing');
-      console.log(_err)
+    } catch (error) {
+      console.error('Payment error:', error);
+      setPaymentError(error instanceof Error ? error.message : 'An unexpected error occurred');
     } finally {
       setIsProcessing(false);
     }

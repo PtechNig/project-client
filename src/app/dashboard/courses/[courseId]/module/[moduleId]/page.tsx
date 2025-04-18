@@ -1,32 +1,31 @@
+'use client';
+
 import { ChevronLeft, Video, FileText } from 'lucide-react';
 import Link from 'next/link';
+import { use } from 'react';
 import { courses } from '@/data/Course';
 
-interface ModulePageProps {
-  params: {
-    courseId: string;
-    moduleId: string;
-  };
-}
+export default function ModulePage({ params }: { params: Promise<{ courseId: string; moduleId: string }> }) {
+  // Unwrap the params Promise first
+  const { courseId, moduleId } = use(params);
 
-export default function ModulePage({ params }: ModulePageProps) {
-  const courseId = Number(params.courseId);
-  const moduleId = Number(params.moduleId);
-
-  const course = courses.find(c => c.id === courseId);
-  const modul = course?.modules.find(m => m.id === moduleId);
+  // Rest of your component remains the same
+  const course = courses.find((c) => c.id === Number(courseId));
+  const modul = course?.modules.find((m) => m.id === Number(moduleId));
 
   if (!course || !modul) {
     return (
       <div className="max-w-6xl mx-auto px-4 py-10 text-center">
         <h1 className="text-2xl font-bold mb-4">Module not found</h1>
-        <Link href={`/dashboard/courses`} className="text-[#0063A4] hover:underline">
+        <Link
+          href={`/dashboard/courses`}
+          className="text-[#0063A4] hover:underline"
+        >
           Return to course list
         </Link>
       </div>
     );
   }
-
   return (
     <div className="max-w-6xl mx-auto px-4 py-10">
       <div className="mb-6 flex items-center gap-4">
