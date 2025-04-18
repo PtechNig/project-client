@@ -1,4 +1,3 @@
-// app/dashboard/certificates/payment/page.tsx
 'use client';
 
 import { useState } from 'react';
@@ -6,11 +5,18 @@ import { loadStripe } from '@stripe/stripe-js';
 import { Elements, CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
 import { FiCheckCircle, FiCreditCard, FiDownload } from 'react-icons/fi';
 
-// Initialize Stripe
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!);
 
+type Certificate = {
+  id: string;
+  name: string;
+  description: string;
+  price: number;
+  currency: string;
+};
+
 const CertificatePaymentPage = () => {
-  const certificate = {
+  const certificate: Certificate = {
     id: 'cert_123',
     name: 'Python Fundamentals Certification',
     description: 'Certificate of completion for Python Fundamentals course',
@@ -23,11 +29,9 @@ const CertificatePaymentPage = () => {
       <h1 className="text-2xl font-bold mb-6">Certificate Payment</h1>
       
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        {/* Certificate Details */}
         <div className="bg-white p-6 rounded-lg shadow">
           <h2 className="text-xl font-semibold mb-4">{certificate.name}</h2>
           <p className="text-gray-600 mb-4">{certificate.description}</p>
-          
           <div className="border-t border-gray-200 pt-4">
             <div className="flex justify-between items-center mb-2">
               <span className="text-gray-600">Certificate Fee:</span>
@@ -38,7 +42,6 @@ const CertificatePaymentPage = () => {
               <span className="text-xl font-bold">${certificate.price.toFixed(2)}</span>
             </div>
           </div>
-          
           <div className="mt-6 p-4 bg-blue-50 rounded-lg">
             <h3 className="font-medium text-blue-800 mb-2">What you&apos;ll get:</h3>
             <ul className="space-y-2">
@@ -58,7 +61,6 @@ const CertificatePaymentPage = () => {
           </div>
         </div>
         
-        {/* Payment Form */}
         <div className="bg-white p-6 rounded-lg shadow">
           <Elements stripe={stripePromise}>
             <PaymentForm certificate={certificate} />
@@ -69,7 +71,7 @@ const CertificatePaymentPage = () => {
   );
 };
 
-const PaymentForm = ({ certificate }: { certificate: any }) => {
+const PaymentForm = ({ certificate }: { certificate: Certificate }) => {
   const stripe = useStripe();
   const elements = useElements();
   const [paymentError, setPaymentError] = useState<string | null>(null);
@@ -87,14 +89,13 @@ const PaymentForm = ({ certificate }: { certificate: any }) => {
     setPaymentError(null);
 
     try {
-      // Create payment intent on your server
       const response = await fetch('/api/create-payment-intent', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          amount: Math.round(certificate.price * 100), // Convert to cents
+          amount: Math.round(certificate.price * 100),
           currency: certificate.currency,
           certificateId: certificate.id
         }),
@@ -102,7 +103,6 @@ const PaymentForm = ({ certificate }: { certificate: any }) => {
 
       const { clientSecret } = await response.json();
 
-      // Confirm the payment
       const { error, paymentIntent } = await stripe.confirmCardPayment(clientSecret, {
         payment_method: {
           card: elements.getElement(CardElement)!,
@@ -111,9 +111,8 @@ const PaymentForm = ({ certificate }: { certificate: any }) => {
 
       if (error) {
         setPaymentError(error.message || 'Payment failed');
-      } else if (paymentIntent.status === 'succeeded') {
+      } else if (paymentIntent?.status === 'succeeded') {
         setPaymentSuccess(true);
-        // Record the successful payment in your database
         await fetch('/api/record-certificate-purchase', {
           method: 'POST',
           headers: {
@@ -126,8 +125,9 @@ const PaymentForm = ({ certificate }: { certificate: any }) => {
           }),
         });
       }
-    } catch (err) {
+    } catch (_err) {
       setPaymentError('An error occurred during payment processing');
+      console.log(_err)
     } finally {
       setIsProcessing(false);
     }
@@ -142,7 +142,6 @@ const PaymentForm = ({ certificate }: { certificate: any }) => {
         <button
           className="bg-blue-600 text-white px-6 py-2 rounded-md hover:bg-blue-700 flex items-center mx-auto"
           onClick={() => {
-            // Generate and download certificate
             window.location.href = `/api/download-certificate?certId=${certificate.id}`;
           }}
         >
