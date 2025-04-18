@@ -40,7 +40,7 @@ const CertificatePaymentPage = () => {
           </div>
           
           <div className="mt-6 p-4 bg-blue-50 rounded-lg">
-            <h3 className="font-medium text-blue-800 mb-2">What you'll get:</h3>
+            <h3 className="font-medium text-blue-800 mb-2">What you&apos;ll get:</h3>
             <ul className="space-y-2">
               <li className="flex items-center">
                 <FiCheckCircle className="text-green-500 mr-2" />
