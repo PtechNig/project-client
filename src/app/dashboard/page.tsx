@@ -23,7 +23,7 @@ export default function DashboardPage() {
   ];
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 text-[#000000]">
       {/* Welcome Header */}
       <div className="bg-white p-6 rounded-lg shadow">
         <h1 className="text-2xl font-bold text-gray-800">Welcome back, Student!</h1>
