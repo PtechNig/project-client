@@ -94,7 +94,7 @@ export default function StudentDashboardLayout({ children }: { children: ReactNo
       </aside>
 
       {/* Main Content */}
-      <main className="flex-1 p-6">{children}</main>
+      <main className="flex-1 p-6 text-[#000000]">{children}</main>
     </div>
   );
 }
